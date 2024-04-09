@@ -5,7 +5,7 @@
 void Phonebook::addContact()
     //
     {
-        Contact myContact = UserInterface::returnContact();
+        Contact myContact = UserInterface::instance().returnContact();
         m_phonebook.push_back(myContact);
         std::cout << "Contact added succesfully!" << std::endl;
     }
@@ -13,7 +13,7 @@ void Phonebook::addContact()
 void Phonebook::findContact()
 
 {
-    Contact myContact = UserInterface::returnNameSurname();
+    Contact myContact = UserInterface::instance().returnNameSurname();
     std::string name = myContact.getName();
     std::string surname = myContact.getSurname();
     //I think there is a better way to rewrite this part above
@@ -53,7 +53,7 @@ void Phonebook::displayContact(Contact myContact) const
 
 void Phonebook::deleteContact()
     {
-        Contact myContact = UserInterface::returnNameSurname();
+        Contact myContact = UserInterface::instance().returnNameSurname();
         std::string name = myContact.getName();
         std::string surname = myContact.getSurname();
         bool isFound {false};
@@ -76,9 +76,9 @@ void Phonebook::deleteContact()
             
 void Phonebook::editContact()
     {
-        Contact myContact = UserInterface::returnNameSurname();
-        std::string name = myContact.getName();
-        std::string surname = myContact.getSurname();
+        Contact myAwesomeContact = UserInterface::instance().returnNameSurname();
+        std::string name = myAwesomeContact.getName();
+        std::string surname = myAwesomeContact.getSurname();
         bool isFound {false};
         for (auto& contact : m_phonebook)
         //Probably this for-loop with if-statement will also be wrapped into a function
@@ -87,8 +87,8 @@ void Phonebook::editContact()
             {
                 isFound = true;            
             }
-            int select = UserInterface::editContactMenu();
-            UserInterface::editContact(select, myContact);
+            int select = UserInterface::instance().editContactMenu();
+            UserInterface::instance().editContact(select, myAwesomeContact);
 
             if (isFound == false)
             {

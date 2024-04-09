@@ -1,9 +1,6 @@
-#include <iostream>
-#include <string>
+#pragma once
 #include <vector>
 #include "contact.h"
-//am i using it right ?
-#pragma once
 
 class Phonebook
 {

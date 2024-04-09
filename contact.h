@@ -1,6 +1,6 @@
-#include <iostream>
-#include <string>
 #pragma once
+
+#include <string>
 //class Contact declaretion file 
 
 class Contact 

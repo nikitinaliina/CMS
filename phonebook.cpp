@@ -2,97 +2,54 @@
 #include "phonebook.h"
 #include "userinterface.h"
 
-void Phonebook::addContact()
-    //
+
+void Phonebook::addContact(const Contact& myContact)
+    
     {
-        Contact myContact = UserInterface::instance().returnContact();
         m_phonebook.push_back(myContact);
-        std::cout << "Contact added succesfully!" << std::endl;
+        std::cout << "Contact added successfully!" << std::endl;
     }
 
-void Phonebook::findContact()
+Contact Phonebook::findContact(const std::string& name, const std::string& surname)
 
 {
-    Contact myContact = UserInterface::instance().returnNameSurname();
-    std::string name = myContact.getName();
-    std::string surname = myContact.getSurname();
-    //I think there is a better way to rewrite this part above
-    bool isFound {false};
     for (const auto& contact : m_phonebook)
         {
             if (contact.getName() == name && contact.getSurname() == surname)
                 {
-                    isFound = true;
-                    Phonebook::displayContact(contact);
-                    break;
+                    return contact;
                 }
         }
-        
-            if (isFound == false)
-                {
-                    std::cout << "No contact found !" << std::endl;
-                }   
+        //I think it will be better to output smth like "No contact found"
+        return Contact("", "");
                 
 }
 
-void Phonebook::displayAll()
-{
-    for (auto& contact : m_phonebook)
-        {
-            Phonebook::displayContact(contact);
-        }
-}
-
-void Phonebook::displayContact(Contact myContact) const
+bool Phonebook::deleteContact(const std::string& name, const std::string& surname)
     {
-        std::cout << "Contact: " << myContact.getName() << ' ' << myContact.getSurname() << std::endl;
-        std::cout << "Phonenumber: " << myContact.getNumber() << std::endl;
-    }
-
-
-
-void Phonebook::deleteContact()
-    {
-        Contact myContact = UserInterface::instance().returnNameSurname();
-        std::string name = myContact.getName();
-        std::string surname = myContact.getSurname();
-        bool isFound {false};
         for (auto& contact : m_phonebook)
                     
             {
                 if (contact.getName() == name && contact.getSurname() == surname) 
                     {
-                        isFound = true;
                         std::vector<Contact>::iterator i;
                         *i = contact;
                         m_phonebook.erase(i);
-                        if (isFound == false)
-                        {
-                            std::cout << "No contact found !" << std::endl;
-                        }   
-                    }    
-            }                    
+                        return true;                        
+                    }
+            }
+            //if NOT FOUND
+            return false;                    
     }
             
-void Phonebook::editContact()
+bool Phonebook::editContact(const std::string& name, const std::string& surname, const Contact& newData)
     {
-        Contact myAwesomeContact = UserInterface::instance().returnNameSurname();
-        std::string name = myAwesomeContact.getName();
-        std::string surname = myAwesomeContact.getSurname();
-        bool isFound {false};
         for (auto& contact : m_phonebook)
-        //Probably this for-loop with if-statement will also be wrapped into a function
         {            
             if (contact.getName() == name && contact.getSurname() == surname)
             {
-                isFound = true;            
-            }
-            int select = UserInterface::instance().editContactMenu();
-            UserInterface::instance().editContact(select, myAwesomeContact);
-
-            if (isFound == false)
-            {
-                std::cout << "No contact found" << std::endl;
+                contact = newData;           
             }
         }
+        return false;
     }        

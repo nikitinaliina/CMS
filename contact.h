@@ -1,8 +1,10 @@
-#pragma once
-
+#include <iostream>
 #include <string>
+#pragma once
 //class Contact declaretion file 
 
+ 
+ 
 class Contact 
 {
     public:
@@ -29,3 +31,5 @@ class Contact
     std::string m_number;
 
 };
+
+std::ostream & operator << (std::ostream &out, const Contact &c);

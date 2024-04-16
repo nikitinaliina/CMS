@@ -1,4 +1,15 @@
 #include "contact.h"
+
+std::ostream & operator << (std::ostream &out, const Contact &c)
+{
+    out << "Name: " << c.getName() << std::endl;
+    out << "Surname: " << c.getSurname() << std::endl;
+    out << "Phone Number: " << c.getNumber() << std::endl;
+
+    return out;
+}
+
+
 Contact::Contact(const std::string& name, 
             const std::string& surname, 
             const std::string& number) 
@@ -10,6 +21,7 @@ Contact::Contact(const std::string& name,
             const std::string& surname) 
             {setName(name);
             setSurname(surname);}
+            
 void Contact::setName(const std::string& name) { m_name = name; }
 
 const std::string& Contact::getName() const { return m_name; }
